@@ -1,4 +1,4 @@
-name: Android CI
+name: Build Android APK
 
 on:
   push:
@@ -10,6 +10,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
     - uses: actions/checkout@v4
@@ -21,17 +23,13 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
+    - name: Generate Gradle Wrapper
+      run: |
+        gradle wrapper --gradle-version 8.7
+        chmod +x gradlew
+
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
-
-    - name: Validate and Fix Gradle Wrapper
-      run: |
-        WRAPPER_JAR="gradle/wrapper/gradle-wrapper.jar"
-        if [ ! -f "$WRAPPER_JAR" ] || ! jar tf "$WRAPPER_JAR" > /dev/null 2>&1; then
-          echo "Gradle wrapper JAR is missing or corrupt. Re-downloading..."
-          mkdir -p gradle/wrapper
-          curl -L https://raw.githubusercontent.com/gradle/gradle/master/gradle/wrapper/gradle-wrapper.jar -o "$WRAPPER_JAR"
-        fi
 
     - name: Recreate debug.keystore
       run: |
@@ -42,14 +40,27 @@ jobs:
           keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
         fi
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-
     - name: Build with Gradle
-      run: ./gradlew assembleDebug --stacktrace || gradle assembleDebug --stacktrace
+      run: ./gradlew assembleDebug --stacktrace
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: app-debug
         path: app/build/outputs/apk/debug/app-debug.apk
+
+    - name: Create Release
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: softprops/action-gh-release@v2
+      with:
+        files: app/build/outputs/apk/debug/app-debug.apk
+        tag_name: v${{ github.run_number }}
+        name: Release v${{ github.run_number }}
+        body: |
+          Automatic build of Calculator Vault.
+          Build Number: ${{ github.run_number }}
+          Commit: ${{ github.sha }}
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
