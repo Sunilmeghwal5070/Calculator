@@ -51,6 +51,7 @@ fun VaultHomeScreen(
 
     Scaffold(
         containerColor = Color(0xFF0D0D0D),
+        modifier = Modifier.safeDrawingPadding(),
         topBar = {
             Column {
                 TopAppBar(
@@ -119,7 +120,7 @@ fun CategoryCard(category: Category, onClick: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(140.dp)
+            .height(120.dp)
             .clip(MaterialTheme.shapes.large)
             .background(
                 Brush.verticalGradient(
@@ -127,20 +128,20 @@ fun CategoryCard(category: Category, onClick: () -> Unit) {
                 )
             )
             .clickable(onClick = onClick)
-            .padding(16.dp)
+            .padding(12.dp)
     ) {
         Column(modifier = Modifier.align(Alignment.BottomStart)) {
             Icon(
                 imageVector = category.icon,
                 contentDescription = null,
                 tint = Color.White,
-                modifier = Modifier.size(32.dp)
+                modifier = Modifier.size(28.dp)
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = category.title,
                 color = Color.White,
-                fontSize = 18.sp,
+                fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
             )
         }

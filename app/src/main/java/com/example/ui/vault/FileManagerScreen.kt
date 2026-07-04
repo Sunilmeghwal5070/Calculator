@@ -38,6 +38,7 @@ fun FileManagerScreen(
 
     Scaffold(
         containerColor = Color.Black,
+        modifier = Modifier.safeDrawingPadding(),
         topBar = {
             Column {
                 TopAppBar(
@@ -72,9 +73,10 @@ fun FileManagerScreen(
                 onClick = { /* Add logic */ },
                 containerColor = Color(0xFFFF9F0A),
                 contentColor = Color.White,
-                shape = CircleShape
+                shape = CircleShape,
+                modifier = Modifier.size(56.dp)
             ) {
-                Icon(Icons.Default.Add, contentDescription = "Add", modifier = Modifier.size(32.dp))
+                Icon(Icons.Default.Add, contentDescription = "Add", modifier = Modifier.size(28.dp))
             }
         }
     ) { padding ->
@@ -90,21 +92,21 @@ fun FileManagerScreen(
             Surface(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(100.dp)
+                    .height(80.dp)
                     .clickable { /* Navigate to all files */ },
-                shape = RoundedCornerShape(24.dp),
+                shape = RoundedCornerShape(20.dp),
                 color = Color(0xFF1C1C1E)
             ) {
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(horizontal = 20.dp),
+                        .padding(horizontal = 16.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Box(
                         modifier = Modifier
-                            .size(64.dp)
-                            .clip(RoundedCornerShape(16.dp))
+                            .size(48.dp)
+                            .clip(RoundedCornerShape(12.dp))
                             .background(
                                 Brush.verticalGradient(
                                     colors = listOf(Color(0xFFFF5E62), Color(0xFFFF9966))
@@ -112,12 +114,12 @@ fun FileManagerScreen(
                             ),
                         contentAlignment = Alignment.Center
                     ) {
-                        Icon(Icons.Default.Folder, contentDescription = null, tint = Color.White, modifier = Modifier.size(36.dp))
+                        Icon(Icons.Default.Folder, contentDescription = null, tint = Color.White, modifier = Modifier.size(28.dp))
                     }
-                    Spacer(modifier = Modifier.width(20.dp))
+                    Spacer(modifier = Modifier.width(16.dp))
                     Column {
-                        Text("All files", color = Color.White, fontSize = 22.sp, fontWeight = FontWeight.Bold)
-                        Text("$totalFiles | $totalFiles file", color = Color.Gray, fontSize = 16.sp)
+                        Text("All files", color = Color.White, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                        Text("$totalFiles | $totalFiles file", color = Color.Gray, fontSize = 14.sp)
                     }
                 }
             }
@@ -156,30 +158,30 @@ fun FileCategoryCard(category: FileCategory, count: Int, onClick: () -> Unit) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .height(160.dp)
+            .height(140.dp)
             .clickable(onClick = onClick),
-        shape = RoundedCornerShape(24.dp),
+        shape = RoundedCornerShape(20.dp),
         color = Color(0xFF1C1C1E)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(20.dp),
+                .padding(16.dp),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             Box(
                 modifier = Modifier
-                    .size(56.dp)
-                    .clip(RoundedCornerShape(16.dp))
+                    .size(48.dp)
+                    .clip(RoundedCornerShape(12.dp))
                     .background(category.brush),
                 contentAlignment = Alignment.Center
             ) {
-                Icon(category.icon, contentDescription = null, tint = Color.White, modifier = Modifier.size(32.dp))
+                Icon(category.icon, contentDescription = null, tint = Color.White, modifier = Modifier.size(28.dp))
             }
             
             Column {
-                Text(category.name, color = Color.White, fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                Text("$count", color = Color.Gray, fontSize = 16.sp)
+                Text(category.name, color = Color.White, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                Text("$count", color = Color.Gray, fontSize = 14.sp)
             }
         }
     }

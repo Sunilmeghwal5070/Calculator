@@ -59,6 +59,7 @@ fun CategoryDetailScreen(
 
     Scaffold(
         containerColor = Color(0xFF0D0D0D),
+        modifier = Modifier.safeDrawingPadding(),
         topBar = {
             Column {
                 TopAppBar(
@@ -125,15 +126,15 @@ fun CategoryDetailScreen(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(100.dp)
+                    .height(80.dp)
             ) {
                 Surface(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(80.dp)
+                        .height(64.dp)
                         .align(Alignment.BottomCenter),
                     color = Color.Transparent,
-                    shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp)
+                    shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
                 ) {
                     Box(
                         modifier = Modifier
@@ -233,11 +234,11 @@ fun CategoryDetailScreen(
                     shape = CircleShape,
                     modifier = Modifier
                         .align(Alignment.TopCenter)
-                        .size(68.dp)
+                        .size(56.dp)
                         .padding(2.dp),
                     elevation = FloatingActionButtonDefaults.elevation(8.dp)
                 ) {
-                    Icon(Icons.Default.Add, contentDescription = "Add", modifier = Modifier.size(36.dp))
+                    Icon(Icons.Default.Add, contentDescription = "Add", modifier = Modifier.size(28.dp))
                 }
             }
         }
@@ -306,7 +307,7 @@ fun CategoryDetailScreen(
                 selectedUris.forEach { uri ->
                     val file = uriToFile(context, uri)
                     if (file != null) {
-                        viewModel.addItem(file, type)
+                        viewModel.addItem(file, type, uri, context)
                     }
                 }
                 showHideDialog = false

@@ -18,9 +18,8 @@ class FileVaultManager(private val context: Context) {
             val encryptedFile = File(vaultDir, encryptedFileName)
 
             val bytes = originalFile.readBytes()
-            // Using existing SecurityUtils which handles IV internally
-            val encryptedBase64 = SecurityUtils.encrypt(android.util.Base64.encodeToString(bytes, android.util.Base64.NO_WRAP))
-            encryptedFile.writeText(encryptedBase64)
+            val encryptedBytes = SecurityUtils.encryptData(bytes)
+            encryptedFile.writeBytes(encryptedBytes)
 
             // CRITICAL: Delete original file after successful encryption
             if (originalFile.exists()) {
@@ -45,9 +44,8 @@ class FileVaultManager(private val context: Context) {
             val encryptedFile = File(item.encryptedPath)
             if (!encryptedFile.exists()) return false
             
-            val encryptedBase64 = encryptedFile.readText()
-            val decryptedBase64 = SecurityUtils.decrypt(encryptedBase64)
-            val decryptedBytes = android.util.Base64.decode(decryptedBase64, android.util.Base64.NO_WRAP)
+            val encryptedBytes = encryptedFile.readBytes()
+            val decryptedBytes = SecurityUtils.decryptData(encryptedBytes)
 
             val restoreFile = File(item.originalPath)
             // Ensure parent directory exists
@@ -66,9 +64,8 @@ class FileVaultManager(private val context: Context) {
     fun decryptAndRetrieve(item: VaultItem): File? {
         return try {
             val encryptedFile = File(item.encryptedPath)
-            val encryptedBase64 = encryptedFile.readText()
-            val decryptedBase64 = SecurityUtils.decrypt(encryptedBase64)
-            val decryptedBytes = android.util.Base64.decode(decryptedBase64, android.util.Base64.NO_WRAP)
+            val encryptedBytes = encryptedFile.readBytes()
+            val decryptedBytes = SecurityUtils.decryptData(encryptedBytes)
 
             val tempFile = File(context.cacheDir, item.name)
             tempFile.writeBytes(decryptedBytes)

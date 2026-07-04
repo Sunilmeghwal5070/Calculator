@@ -41,11 +41,20 @@ class VaultViewModel(
         }
     }
 
-    fun addItem(file: java.io.File, type: String) {
+    fun addItem(file: java.io.File, type: String, originalUri: android.net.Uri? = null, context: android.content.Context? = null) {
         viewModelScope.launch {
             val vaultItem = fileVaultManager.encryptAndStore(file, type)
             if (vaultItem != null) {
                 vaultDao.insertItem(vaultItem)
+                
+                // If we have an original URI, try to delete it from MediaStore
+                if (originalUri != null && context != null) {
+                    try {
+                        context.contentResolver.delete(originalUri, null, null)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
             }
         }
     }

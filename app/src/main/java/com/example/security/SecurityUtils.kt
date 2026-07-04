@@ -42,31 +42,39 @@ object SecurityUtils {
     }
 
     fun encrypt(data: String): String {
-        return try {
-            val cipher = Cipher.getInstance(TRANSFORMATION)
-            cipher.init(Cipher.ENCRYPT_MODE, secretKey)
-            val iv = cipher.iv
-            val encryptedData = cipher.doFinal(data.toByteArray())
-            val combined = iv + encryptedData
-            Base64.encodeToString(combined, Base64.NO_WRAP)
-        } catch (e: Exception) {
-            ""
-        }
+        return Base64.encodeToString(encryptData(data.toByteArray()), Base64.NO_WRAP)
     }
 
     fun decrypt(encryptedBase64: String): String {
         if (encryptedBase64.isEmpty()) return ""
+        val decoded = Base64.decode(encryptedBase64, Base64.NO_WRAP)
+        return String(decryptData(decoded))
+    }
+
+    fun encryptData(data: ByteArray): ByteArray {
         return try {
-            val combined = Base64.decode(encryptedBase64, Base64.NO_WRAP)
+            val cipher = Cipher.getInstance(TRANSFORMATION)
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey)
+            val iv = cipher.iv
+            val encryptedData = cipher.doFinal(data)
+            iv + encryptedData
+        } catch (e: Exception) {
+            ByteArray(0)
+        }
+    }
+
+    fun decryptData(combined: ByteArray): ByteArray {
+        if (combined.isEmpty()) return ByteArray(0)
+        return try {
             val iv = combined.sliceArray(0 until 12)
             val encryptedData = combined.sliceArray(12 until combined.size)
 
             val cipher = Cipher.getInstance(TRANSFORMATION)
             val spec = GCMParameterSpec(128, iv)
             cipher.init(Cipher.DECRYPT_MODE, secretKey, spec)
-            String(cipher.doFinal(encryptedData))
+            cipher.doFinal(encryptedData)
         } catch (e: Exception) {
-            ""
+            ByteArray(0)
         }
     }
 }

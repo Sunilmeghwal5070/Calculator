@@ -55,7 +55,8 @@ fun CalculatorScreen(viewModel: CalculatorViewModel, onUnlock: () -> Unit) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(20.dp),
+                .safeDrawingPadding()
+                .padding(horizontal = 16.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.Bottom
         ) {
             // Top Icons (Removed redundant History text button)
@@ -85,8 +86,8 @@ fun CalculatorScreen(viewModel: CalculatorViewModel, onUnlock: () -> Unit) {
                 horizontalAlignment = Alignment.End,
                 verticalArrangement = Arrangement.Bottom
             ) {
-            val baseFontSize = 72
-            val minFontSize = 32
+            val baseFontSize = 64
+            val minFontSize = 28
             val threshold = 7
             val fontSizeValue = if (fullExpression.length > threshold) {
                 (baseFontSize - (fullExpression.length - threshold) * 4).coerceAtLeast(minFontSize)
@@ -109,12 +110,12 @@ fun CalculatorScreen(viewModel: CalculatorViewModel, onUnlock: () -> Unit) {
                     Text(
                         text = liveResult,
                         color = Color.White.copy(alpha = 0.5f),
-                        fontSize = 36.sp,
+                        fontSize = 32.sp,
                         fontWeight = FontWeight.Normal,
                         textAlign = TextAlign.End,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 12.dp)
+                            .padding(top = 8.dp)
                     )
                 }
             }
@@ -123,7 +124,7 @@ fun CalculatorScreen(viewModel: CalculatorViewModel, onUnlock: () -> Unit) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(40.dp),
+                    .height(24.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Box(
@@ -148,10 +149,9 @@ fun CalculatorScreen(viewModel: CalculatorViewModel, onUnlock: () -> Unit) {
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     row.forEach { label ->
-                        val weight = 1f
                         CalculatorButton(
                             label = label,
-                            modifier = Modifier.weight(weight),
+                            modifier = Modifier.weight(1f),
                             onClick = {
                                 when (label) {
                                     "AC" -> viewModel.onClearClick()
@@ -165,7 +165,7 @@ fun CalculatorScreen(viewModel: CalculatorViewModel, onUnlock: () -> Unit) {
                         )
                     }
                 }
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(12.dp))
             }
         }
 
@@ -244,8 +244,8 @@ fun CalculatorButton(
     val isPressed by interactionSource.collectIsPressedAsState()
     
     val scale by animateFloatAsState(
-        targetValue = if (isPressed) 0.95f else 1f,
-        animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy),
+        targetValue = if (isPressed) 0.90f else 1f,
+        animationSpec = spring(stiffness = Spring.StiffnessMedium),
         label = "pressScale"
     )
 
