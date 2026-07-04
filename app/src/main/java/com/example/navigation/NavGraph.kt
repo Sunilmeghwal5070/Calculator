@@ -27,7 +27,6 @@ import com.example.ui.vault.BrowserScreen
 import com.example.ui.vault.WallpaperScreen
 import com.example.ui.vault.TrashScreen
 import com.example.ui.vault.IntruderCameraScreen
-import com.example.ui.vault.ChangeIconScreen
 import com.example.navigation.SplashScreen
 
 @Composable
@@ -130,12 +129,6 @@ fun NavGraph(
                 setupViewModel = setupViewModel,
                 onBack = { navController.popBackStack() },
                 onNavigate = { route -> navController.navigate(route) }
-            )
-        }
-        composable<ChangeIconRoute> {
-            ChangeIconScreen(
-                viewModel = settingsViewModel,
-                onBack = { navController.popBackStack() }
             )
         }
         composable<CameraRoute> {

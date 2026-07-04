@@ -1,12 +1,7 @@
 <resources>
     <string name="app_name">Calculator</string>
-    <string name="label_weather">Weather</string>
-    <string name="label_clock">Clock</string>
-    <string name="label_notes">Notes</string>
-    <string name="label_browser">Browser</string>
     
     <string name="settings">Settings</string>
-    <string name="change_app_icon">Change app icon</string>
     <string name="prevent_screenshots">Prevent screenshots</string>
     <string name="prevent_screenshots_desc">Prevent taking screenshots inside the app</string>
     <string name="language">Language</string>

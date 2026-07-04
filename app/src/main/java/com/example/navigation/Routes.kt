@@ -45,7 +45,4 @@ object IntruderCameraRoute
 object SettingsRoute
 
 @Serializable
-object ChangeIconRoute
-
-@Serializable
 object CameraRoute

@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.sp
 
 import com.example.ui.setup.SetupViewModel
 import com.example.navigation.SetupRoute
-import com.example.navigation.ChangeIconRoute
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.example.R
@@ -72,22 +71,6 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.height(16.dp))
             
             SettingsSection("Advanced") {
-                SettingsItem(
-                    title = stringResource(R.string.change_app_icon),
-                    icon = Icons.Default.Calculate,
-                    onClick = { onNavigate(ChangeIconRoute) },
-                    trailing = {
-                        Box(
-                            modifier = Modifier
-                                .size(24.dp)
-                                .background(Color(0xFFFF9F0A), RoundedCornerShape(4.dp)),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(Icons.Default.Edit, contentDescription = null, tint = Color.Black, modifier = Modifier.size(14.dp))
-                        }
-                    }
-                )
-                
                 val preventScreenshots by viewModel.preventScreenshots.collectAsState()
                 var showScreenshotWarning by remember { mutableStateOf(false) }
 
