@@ -47,13 +47,18 @@ class VaultViewModel(
             if (vaultItem != null) {
                 vaultDao.insertItem(vaultItem)
                 
-                // If we have an original URI, try to delete it from MediaStore
+                // If we have an original URI and context, delete it from MediaStore
                 if (originalUri != null && context != null) {
                     try {
                         context.contentResolver.delete(originalUri, null, null)
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
+                }
+                
+                // Also try to delete the temporary file if it exists
+                if (file.exists() && file.absolutePath.contains("cache")) {
+                    file.delete()
                 }
             }
         }

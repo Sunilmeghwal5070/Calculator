@@ -125,12 +125,13 @@ fun WelcomeStep(onStart: () -> Unit) {
             onClick = onStart,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp),
+                .height(50.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-            shape = RoundedCornerShape(28.dp)
+            shape = RoundedCornerShape(25.dp)
         ) {
-            Text(stringResource(R.string.start), color = Color.Black, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+            Text(stringResource(R.string.start), color = Color.Black, fontSize = 16.sp, fontWeight = FontWeight.Bold)
         }
+        Spacer(modifier = Modifier.height(32.dp))
     }
 }
 
@@ -176,12 +177,13 @@ fun PermissionStep(onAllow: () -> Unit) {
             onClick = onAllow,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp),
+                .height(50.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-            shape = RoundedCornerShape(28.dp)
+            shape = RoundedCornerShape(25.dp)
         ) {
-            Text(stringResource(R.string.allow_access), color = Color.Black, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+            Text(stringResource(R.string.allow_access), color = Color.Black, fontSize = 16.sp, fontWeight = FontWeight.Bold)
         }
+        Spacer(modifier = Modifier.height(32.dp))
     }
 }
 

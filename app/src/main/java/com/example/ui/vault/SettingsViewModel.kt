@@ -41,14 +41,39 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun shareApp() {
-        val sendIntent: Intent = Intent().apply {
-            action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, "Check out this secure Calculator Vault app!")
-            type = "text/plain"
+        val application = getApplication<Application>()
+        val context = application.applicationContext
+        
+        try {
+            val apkFile = java.io.File(context.packageCodePath)
+            val apkUri = androidx.core.content.FileProvider.getUriForFile(
+                context,
+                "${context.packageName}.provider",
+                apkFile
+            )
+
+            val shareIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "Check out Calculator Vault: A premium calculator with a hidden secure vault for your photos and files!")
+                putExtra(Intent.EXTRA_STREAM, apkUri)
+                type = "application/vnd.android.package-archive"
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            }
+            
+            val chooser = Intent.createChooser(shareIntent, "Share App APK")
+            chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(chooser)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            // Fallback to text sharing if APK sharing fails
+            val textIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "Check out Calculator Vault: A premium calculator with a hidden secure vault!")
+                type = "text/plain"
+            }
+            val chooser = Intent.createChooser(textIntent, "Share App")
+            chooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(chooser)
         }
-        val shareIntent = Intent.createChooser(sendIntent, null).apply {
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        }
-        getApplication<Application>().startActivity(shareIntent)
     }
 }

@@ -71,15 +71,15 @@ fun CalculatorScreen(viewModel: CalculatorViewModel, onUnlock: () -> Unit) {
                         var totalDrag = 0f
                         detectVerticalDragGestures(
                             onDragEnd = {
-                                if (totalDrag > 300f) { // Increased threshold for swipe down
+                                if (totalDrag > 150f) { 
                                     showHistory = true
+                                } else if (totalDrag < -150f && showHistory) {
+                                    showHistory = false
                                 }
                                 totalDrag = 0f
                             },
                             onVerticalDrag = { _, dragAmount ->
-                                if (dragAmount > 0) { // Only count downward drags
-                                    totalDrag += dragAmount
-                                }
+                                totalDrag += dragAmount
                             }
                         )
                     },
@@ -146,7 +146,7 @@ fun CalculatorScreen(viewModel: CalculatorViewModel, onUnlock: () -> Unit) {
             buttons.forEach { row ->
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     row.forEach { label ->
                         CalculatorButton(
@@ -165,7 +165,7 @@ fun CalculatorScreen(viewModel: CalculatorViewModel, onUnlock: () -> Unit) {
                         )
                     }
                 }
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(10.dp))
             }
         }
 
