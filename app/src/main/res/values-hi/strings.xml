@@ -1,12 +1,7 @@
 <resources>
-    <string name="app_name">कैलकुलेटर</string>
-    <string name="label_weather">मौसम</string>
-    <string name="label_clock">घड़ी</string>
-    <string name="label_notes">नोट्स</string>
-    <string name="label_browser">ब्राउज़र</string>
+    <string name="app_name">कैलकुलेटर वॉल्ट</string>
     
     <string name="settings">सेटिंग्स</string>
-    <string name="change_app_icon">ऐप आइकन बदलें</string>
     <string name="prevent_screenshots">स्क्रीनशॉट रोकें</string>
     <string name="prevent_screenshots_desc">ऐप के अंदर स्क्रीनशॉट लेने से रोकें</string>
     <string name="language">भाषा</string>
