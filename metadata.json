@@ -1,5 +1,5 @@
 {
-  "name": "Calculator",
+  "name": "Calculator Vault",
   "description": "A premium iOS-style calculator with a hidden encrypted vault for your private files, photos, and apps.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
