@@ -52,7 +52,9 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
             "com.example.WeatherAlias",
             "com.example.ClockAlias",
             "com.example.NoteAlias",
-            "com.example.BrowserAlias"
+            "com.example.BrowserAlias",
+            "com.example.CameraAlias",
+            "com.example.MusicAlias"
         )
 
         // 1. Enable the new one first

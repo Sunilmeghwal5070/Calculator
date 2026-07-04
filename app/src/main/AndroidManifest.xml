@@ -94,6 +94,34 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
+
+        <activity-alias
+            android:name=".CameraAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_disguise_camera"
+            android:label="Camera"
+            android:roundIcon="@mipmap/ic_disguise_camera_round"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name=".MusicAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_disguise_music"
+            android:label="Music"
+            android:roundIcon="@mipmap/ic_disguise_music_round"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
     </application>
 
 </manifest>

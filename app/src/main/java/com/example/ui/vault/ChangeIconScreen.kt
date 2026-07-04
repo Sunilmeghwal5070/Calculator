@@ -43,11 +43,13 @@ fun ChangeIconScreen(
     var showConfirmDialog by remember { mutableStateOf(false) }
 
     val options = listOf(
-        IconOption("Calculator", "com.example.CalculatorAlias", R.mipmap.ic_launcher, "Calculator"),
-        IconOption("Weather", "com.example.WeatherAlias", R.mipmap.ic_disguise_weather, "Weather"),
-        IconOption("Clock", "com.example.ClockAlias", R.mipmap.ic_disguise_clock, "Clock"),
-        IconOption("Notes", "com.example.NoteAlias", R.mipmap.ic_disguise_note, "Note"),
-        IconOption("Browser", "com.example.BrowserAlias", R.mipmap.ic_disguise_browser, "Browser")
+        IconOption("Calculator", "com.example.CalculatorAlias", R.drawable.ic_launcher_foreground, "Calculator"),
+        IconOption("Weather", "com.example.WeatherAlias", R.drawable.ic_disguise_weather_foreground, "Weather"),
+        IconOption("Clock", "com.example.ClockAlias", R.drawable.ic_disguise_clock_foreground, "Clock"),
+        IconOption("Notes", "com.example.NoteAlias", R.drawable.ic_disguise_note_foreground, "Note"),
+        IconOption("Browser", "com.example.BrowserAlias", R.drawable.ic_disguise_browser_foreground, "Browser"),
+        IconOption("Camera", "com.example.CameraAlias", R.drawable.ic_disguise_camera_foreground, "Camera"),
+        IconOption("Music", "com.example.MusicAlias", R.drawable.ic_disguise_music_foreground, "Music")
     )
 
     Scaffold(
@@ -92,7 +94,7 @@ fun ChangeIconScreen(
             IconItem(option = currentOption, isSelected = true, onClick = {})
 
             Spacer(modifier = Modifier.height(24.dp))
-            Divider(color = Color.White.copy(alpha = 0.1f))
+            HorizontalDivider(color = Color.White.copy(alpha = 0.1f))
             Spacer(modifier = Modifier.height(16.dp))
 
             options.groupBy { it.category }.forEach { (category, categoryOptions) ->
