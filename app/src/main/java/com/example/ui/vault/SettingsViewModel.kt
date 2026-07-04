@@ -57,7 +57,10 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
             "com.example.MusicAlias",
             "com.example.GalleryAlias",
             "com.example.FilesAlias",
-            "com.example.SettingsAlias"
+            "com.example.SettingsAlias",
+            "com.example.ContactsAlias",
+            "com.example.MessagesAlias",
+            "com.example.RadioAlias"
         )
 
         // 1. Enable the new one first

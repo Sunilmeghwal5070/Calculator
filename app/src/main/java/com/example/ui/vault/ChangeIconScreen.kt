@@ -54,7 +54,10 @@ fun ChangeIconScreen(
         IconOption("Music", "com.example.MusicAlias", R.drawable.ic_disguise_music_foreground, "Music"),
         IconOption("Gallery", "com.example.GalleryAlias", R.drawable.ic_disguise_gallery_foreground, "Gallery"),
         IconOption("Files", "com.example.FilesAlias", R.drawable.ic_disguise_files_foreground, "Files"),
-        IconOption("Settings", "com.example.SettingsAlias", R.drawable.ic_disguise_settings_foreground, "Settings")
+        IconOption("Settings", "com.example.SettingsAlias", R.drawable.ic_disguise_settings_foreground, "Settings"),
+        IconOption("Contacts", "com.example.ContactsAlias", R.drawable.ic_disguise_contacts_foreground, "Communication"),
+        IconOption("Messages", "com.example.MessagesAlias", R.drawable.ic_disguise_messages_foreground, "Communication"),
+        IconOption("Radio", "com.example.RadioAlias", R.drawable.ic_disguise_radio_foreground, "Tools")
     )
 
     Scaffold(

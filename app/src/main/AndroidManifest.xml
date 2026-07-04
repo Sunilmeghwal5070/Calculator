@@ -164,6 +164,48 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
+
+        <activity-alias
+            android:name=".ContactsAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_disguise_contacts"
+            android:label="Contacts"
+            android:roundIcon="@mipmap/ic_disguise_contacts_round"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name=".MessagesAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_disguise_messages"
+            android:label="Messages"
+            android:roundIcon="@mipmap/ic_disguise_messages_round"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name=".RadioAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_disguise_radio"
+            android:label="Radio"
+            android:roundIcon="@mipmap/ic_disguise_radio_round"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
     </application>
 
 </manifest>
