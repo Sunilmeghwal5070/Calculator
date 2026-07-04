@@ -122,6 +122,48 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
+
+        <activity-alias
+            android:name=".GalleryAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_disguise_gallery"
+            android:label="Gallery"
+            android:roundIcon="@mipmap/ic_disguise_gallery_round"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name=".FilesAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_disguise_files"
+            android:label="Files"
+            android:roundIcon="@mipmap/ic_disguise_files_round"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name=".SettingsAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_disguise_settings"
+            android:label="Settings"
+            android:roundIcon="@mipmap/ic_disguise_settings_round"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
     </application>
 
 </manifest>

@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.CheckCircle
@@ -49,7 +51,10 @@ fun ChangeIconScreen(
         IconOption("Notes", "com.example.NoteAlias", R.drawable.ic_disguise_note_foreground, "Note"),
         IconOption("Browser", "com.example.BrowserAlias", R.drawable.ic_disguise_browser_foreground, "Browser"),
         IconOption("Camera", "com.example.CameraAlias", R.drawable.ic_disguise_camera_foreground, "Camera"),
-        IconOption("Music", "com.example.MusicAlias", R.drawable.ic_disguise_music_foreground, "Music")
+        IconOption("Music", "com.example.MusicAlias", R.drawable.ic_disguise_music_foreground, "Music"),
+        IconOption("Gallery", "com.example.GalleryAlias", R.drawable.ic_disguise_gallery_foreground, "Gallery"),
+        IconOption("Files", "com.example.FilesAlias", R.drawable.ic_disguise_files_foreground, "Files"),
+        IconOption("Settings", "com.example.SettingsAlias", R.drawable.ic_disguise_settings_foreground, "Settings")
     )
 
     Scaffold(
@@ -86,6 +91,7 @@ fun ChangeIconScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
+                .verticalScroll(rememberScrollState())
                 .padding(horizontal = 16.dp)
         ) {
             Text("Current icon", color = Color.Gray, fontSize = 14.sp, modifier = Modifier.padding(vertical = 16.dp))
@@ -99,21 +105,32 @@ fun ChangeIconScreen(
 
             options.groupBy { it.category }.forEach { (category, categoryOptions) ->
                 Text(category, color = Color.Gray, fontSize = 14.sp, modifier = Modifier.padding(vertical = 8.dp))
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(4),
-                    modifier = Modifier.fillMaxWidth().height(100.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    items(categoryOptions) { option ->
-                        IconGridItem(
-                            option = option,
-                            isSelected = selectedAlias == option.alias,
-                            onClick = { selectedAlias = option.alias }
-                        )
+                
+                // Using a simple Row for each category since LazyVerticalGrid inside Scrollable Column is complex
+                // Better to just chunk the list and show rows
+                categoryOptions.chunked(4).forEach { rowItems ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                        horizontalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        rowItems.forEach { option ->
+                            Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
+                                IconGridItem(
+                                    option = option,
+                                    isSelected = selectedAlias == option.alias,
+                                    onClick = { selectedAlias = option.alias }
+                                )
+                            }
+                        }
+                        // Add empty spacers if row is not full
+                        repeat(4 - rowItems.size) {
+                            Spacer(modifier = Modifier.weight(1f))
+                        }
                     }
                 }
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(8.dp))
             }
+            Spacer(modifier = Modifier.height(80.dp)) // Extra space for bottom bar
         }
     }
 
