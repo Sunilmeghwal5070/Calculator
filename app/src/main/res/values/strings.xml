@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Calculator</string>
+    <string name="label_weather">Weather</string>
+    <string name="label_clock">Clock</string>
+    <string name="label_notes">Notes</string>
+    <string name="label_browser">Browser</string>
+    
+    <string name="settings">Settings</string>
+    <string name="change_app_icon">Change app icon</string>
+    <string name="prevent_screenshots">Prevent screenshots</string>
+    <string name="prevent_screenshots_desc">Prevent taking screenshots inside the app</string>
+    <string name="language">Language</string>
+    <string name="language_desc">Change app language</string>
+    
+    <string name="calculator">Calculator</string>
+    <string name="history">History</string>
+    <string name="clear">Clear</string>
+    <string name="no_history">No history yet</string>
+    
+    <string name="pin_setup_title">Enter a 4-digit PIN and tap \'=\'</string>
+    <string name="pin_confirm_title">Enter your PIN again and tap \'=\'</string>
+    <string name="start">Start</string>
+    <string name="allow_access">Allow access</string>
+    
+    <string name="security_question">Security question</string>
+    <string name="your_answer">Your Answer</string>
+    <string name="save">Save</string>
+</resources>
