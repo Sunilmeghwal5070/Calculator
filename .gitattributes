@@ -1,0 +1,5 @@
+# Ensure binary files are not modified during push
+*.jar binary
+*.jks binary
+*.png binary
+*.webp binary

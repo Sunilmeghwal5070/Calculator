@@ -21,17 +21,32 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
+
+    - name: Validate and Fix Gradle Wrapper
+      run: |
+        WRAPPER_JAR="gradle/wrapper/gradle-wrapper.jar"
+        if [ ! -f "$WRAPPER_JAR" ] || ! jar tf "$WRAPPER_JAR" > /dev/null 2>&1; then
+          echo "Gradle wrapper JAR is missing or corrupt. Re-downloading..."
+          mkdir -p gradle/wrapper
+          curl -L https://raw.githubusercontent.com/gradle/gradle/master/gradle/wrapper/gradle-wrapper.jar -o "$WRAPPER_JAR"
+        fi
 
     - name: Recreate debug.keystore
       run: |
         if [ -f "debug.keystore.base64" ]; then
           base64 -d debug.keystore.base64 > debug.keystore
+        else
+          # Create a dummy one if it doesn't exist
+          keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
         fi
 
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
     - name: Build with Gradle
-      run: ./gradlew assembleDebug
+      run: ./gradlew assembleDebug --stacktrace || gradle assembleDebug --stacktrace
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
