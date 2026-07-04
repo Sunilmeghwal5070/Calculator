@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.sp
 fun IntruderCameraScreen(onBack: () -> Unit) {
     Scaffold(
         containerColor = Color(0xFF0F0F0F),
+        modifier = Modifier.safeDrawingPadding(),
         topBar = {
             Column {
                 CenterAlignedTopAppBar(

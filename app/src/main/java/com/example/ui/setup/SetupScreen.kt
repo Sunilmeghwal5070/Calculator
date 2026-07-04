@@ -131,7 +131,7 @@ fun WelcomeStep(onStart: () -> Unit) {
         ) {
             Text(stringResource(R.string.start), color = Color.Black, fontSize = 16.sp, fontWeight = FontWeight.Bold)
         }
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(80.dp))
     }
 }
 
@@ -183,7 +183,7 @@ fun PermissionStep(onAllow: () -> Unit) {
         ) {
             Text(stringResource(R.string.allow_access), color = Color.Black, fontSize = 16.sp, fontWeight = FontWeight.Bold)
         }
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(80.dp))
     }
 }
 
