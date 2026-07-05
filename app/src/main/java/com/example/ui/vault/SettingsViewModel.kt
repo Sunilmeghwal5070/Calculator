@@ -87,4 +87,16 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
             }
         }
     }
+
+    fun checkForUpdates() {
+        val application = getApplication<Application>()
+        val context = application.applicationContext
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://github.com/Sunilmeghwal5070/Calculator/releases"))
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 }

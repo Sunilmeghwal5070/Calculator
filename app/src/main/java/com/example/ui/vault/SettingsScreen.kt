@@ -203,6 +203,12 @@ fun SettingsScreen(
                 }
 
                 SettingsItem(
+                    title = "Check for updates",
+                    icon = Icons.Default.Update,
+                    onClick = { viewModel.checkForUpdates() }
+                )
+
+                SettingsItem(
                     title = "Share app",
                     icon = Icons.Default.Share,
                     onClick = { viewModel.shareApp() }
